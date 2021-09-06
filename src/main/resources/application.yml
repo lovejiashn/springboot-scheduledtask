@@ -1,0 +1,21 @@
+server:
+  port: 8002
+  servlet:
+    context-path: /scheduled
+spring:
+  datasource:
+    url: http://192.168.3.200:3306/scheduled?characterEncoding=utf-8&allowMultiQueries=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      max-active: 5       #最大活动连接数
+      initial-size: 5     #初始化连接数
+      max-wait: 30000     #最大等待时间
+      validation-query: select 1 from dual
+      validation-query-timeout: 1
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
