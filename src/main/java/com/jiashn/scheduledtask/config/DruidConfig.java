@@ -2,7 +2,7 @@ package com.jiashn.scheduledtask.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,15 +14,21 @@ import javax.sql.DataSource;
  * @date: 2021/9/6 11:42
  */
 @Configuration
-@ConfigurationProperties(prefix = "spring.datasource.druid")
 @Data
 public class DruidConfig {
+    @Value("${spring.datasource.url}")
     private String url;
+    @Value("${spring.datasource.username}")
     private String userName;
+    @Value("${spring.datasource.password}")
     private String passWord;
+    @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
+    @Value("${spring.datasource.druid.max-active}")
     private Integer maxActive;
+    @Value("${spring.datasource.druid.max-wait}")
     private long maxWait;
+    @Value("${spring.datasource.druid.initial-size}")
     private Integer initialSize;
 
     @Bean

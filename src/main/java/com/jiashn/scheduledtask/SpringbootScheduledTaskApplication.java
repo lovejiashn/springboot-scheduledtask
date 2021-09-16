@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author jiangjs
  */
 @SpringBootApplication
-@MapperScan("com.jiashn.**.*mapper")
+@MapperScan("com.jiashn.scheduledtask.**.*mapper")
 public class SpringbootScheduledTaskApplication {
 
     public static void main(String[] args) {

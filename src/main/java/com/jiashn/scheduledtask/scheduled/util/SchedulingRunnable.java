@@ -32,10 +32,6 @@ public class SchedulingRunnable implements Runnable {
      */
     private String params;
 
-    public SchedulingRunnable(String beanName,String methodName){
-        this.beanName = beanName;
-        this.methodName = methodName;
-    }
     public SchedulingRunnable(String beanName,String methodName,String params){
         this.beanName = beanName;
         this.methodName = methodName;
@@ -43,8 +39,9 @@ public class SchedulingRunnable implements Runnable {
     }
     @Override
     public void run() {
+        //获取需要进行定时处理的创建类，beanName：类名
         Object bean = SpringContextUtils.getBean(beanName);
-        Method method = null;
+        Method method;
         try {
             if (StringUtils.isNotBlank(params)){
                 method = bean.getClass().getDeclaredMethod(methodName,String.class);

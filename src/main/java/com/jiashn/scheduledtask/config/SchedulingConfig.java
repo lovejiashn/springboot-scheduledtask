@@ -16,10 +16,14 @@ public class SchedulingConfig {
 
     @Bean
     public TaskScheduler taskScheduler(){
+        //创建定时任务线程池
         ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
+        //线程池大小
         taskScheduler.setPoolSize(4);
+        //是否将取消后的任务从队列中消除，与cancel()方法结合，删除队列中的任务
         taskScheduler.setRemoveOnCancelPolicy(true);
-        taskScheduler.setThreadNamePrefix("taskScheduledThreadPool-");
+        //线程名称前缀
+        taskScheduler.setThreadNamePrefix("taskThreadPool-");
         return taskScheduler;
     }
 }

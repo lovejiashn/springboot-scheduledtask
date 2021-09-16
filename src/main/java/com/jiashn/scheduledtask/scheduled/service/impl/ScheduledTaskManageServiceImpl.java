@@ -28,7 +28,9 @@ public class ScheduledTaskManageServiceImpl implements ScheduledTaskManageServic
         int count = taskManageMapper.insert(schedulerTask);
         if (count > 0){
             if (schedulerTask.getTaskStatus() == 1){
+                //创建定时任务方法线程
                 SchedulingRunnable runnable = new SchedulingRunnable(schedulerTask.getBeanName(), schedulerTask.getMethodName(), schedulerTask.getParams());
+                //将线程加入定时任务map中
                 cronTaskRegistrar.addCronTask(runnable,schedulerTask.getCronExp());
             }
         }
@@ -41,6 +43,9 @@ public class ScheduledTaskManageServiceImpl implements ScheduledTaskManageServic
             return ResultJson.error(404,"请传递正确的任务id");
         }
         SysSchedulerTask sysSchedulerTask = taskManageMapper.selectById(schedulerTask.getId());
+        if (Objects.isNull(sysSchedulerTask)){
+            return ResultJson.error(404,"未找到该任务");
+        }
         int count = taskManageMapper.updateById(schedulerTask);
         //需要删除已存在的定时任务信息
         if (sysSchedulerTask.getTaskStatus() == 1){
